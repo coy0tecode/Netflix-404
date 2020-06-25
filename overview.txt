@@ -1,0 +1,80 @@
+*** Explanation/Overview of Netflix-404 Project ***
+
+
+Purpose:
+
+* Collect a list of movies available to stream on netflix according to reelgood.com
+* Search the first page of google for each movie title using a google url with the search term: movie name + movie + online
+* Look for a netflix link on the results page and click it if available
+* Check to see if the netflix page has the movie or returns a 404 error
+* Record these results to a CSV file
+* Sort and analyze the data
+* Use the sorted data to create a summary file, CSV file of movies that weren't found, CSV file of movies that were found but
+  the netflix page returned a 404 error, and a simple chart/graph to illustrate the percentages of movies avaialble, not found
+  and those that returned a 404 error
+* Results do not necessarily indicate an issue with reelgood's list
+* Results could indicate an issue with reelgood's list, google's search results, or the search terms used
+
+
+Files used:
+
+* reelgood_scrape.py
+	- Python script to pull movie names from reelgood listed as available on Netflix and write them to a text file
+
+* movie_names.txt
+	- File lists all the movie names scraped by reelgood_scrape.py. All entries separated by a newline character
+
+* web_search.py
+	- Python script to search google for the movie names listed in movie_names.txt
+	- Movies are searched using a direct google url, in the format: movie name + movie + online
+		- movie name + netflix search is not used as the purpose of this project is to determine how many netflix results are found simply
+		when searching for the movie online. And from the Netflix results found how many of the movies are actually available to stream
+		via Netflix? 
+	- Only the first page of google is searched for a relevant Netflix result
+	- If a result is found, the program waits 90 seconds and then attempts to click the found link
+	- Results are written to csv file netflix_search.csv in the following format:
+		- Movie (movie name),Netflix Result (Found or Not Found), 404 (if a result is found, does the page 404 or is the movie available?,
+		N/A is used if no Netflix Result is found), URL (copies URL from clicked page, N/A is used if no Netflix Result is found)
+
+* netflix_search.csv
+	- stores all the data collected by web_search.py
+
+* data_sort.py
+	- Opens the netflix_search.csv in a pandas data frame
+	- Makes variables for each category/column
+	- Calculates all missing movies and movies with a 404 URL and writes them to respective files:
+		- Not_Found.csv, 404_Error.csv
+	- Writes a summary text file the contains the following:
+		- Total number of movies searched, number of movies found, number of movies available on Netflix, number of movies not found,
+		number of 404 errors encountered, percentages of available, 404, and not found movies
+	- Creates a simple graph/chart of the percentages listed above
+
+* Not_Found.csv
+	- Contains all the information of movies not found via web_search.py
+
+* 404_Error.csv
+	- Contains all the information of movies where a netflix result was found, but the page returned a 404 error when clicked
+
+
+
+Room for Improvement:
+
+* Search multiple pages on google, perhaps first 10 results pages, for a netflix link (or all netflix links found)
+* Use other search engines and compare with google's results
+* Find a better way to ensure web_search.py clicks on the netflix link, in current iteration will sometimes find the
+  link but be unable to click it and return a google url instead of a netflix one
+	- Many solutions were already tried, such as waiting for element to be visible, waiting for element to be clickable,
+        scrolling to the element, etc etc.
+
+
+Anaconda Navigator Version 1.9.12
+Python Version 3.7.7
+Packages used:
+* BeautifulSoup
+* numpy
+* pandas
+
+	
+
+
+
