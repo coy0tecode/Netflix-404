@@ -1,5 +1,5 @@
 # Netflix-404
-Repository for my Netflix-404 Project
+Repository for my Netflix-404 Project.
 I was searching on google for a movie to watch one night, and on the first page of the results was a Netflix result for the movie. But when I clicked it, I got a 404 page. I searched on Netflix itself for the movie and got no results.
 
 This is my first project, a small one where we scrape the names of all the movies available on Netflix according to reelgood.com's filter, search the first page of google using the movie names plus 'movie online', click the first Netflix link if found, and check to see if the movie's available or if there's a 404 error.
